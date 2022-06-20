@@ -1,0 +1,40 @@
+<h2>Prueba de filtro con PIPE :)</h2>
+
+<div class="form-group mb-4">
+  <input
+    class="form-control"
+    type="text"
+    [(ngModel)]="searchText"
+    placeholder="Buscar"
+  />
+</div>
+
+<table
+  class="table"
+  *ngIf="(data | filter: searchText).length > 0; else noResults"
+>
+  <colgroup>
+    <col width="5%" />
+    <col width="*" />
+    <col width="35%" />
+    <col width="15%" />
+  </colgroup>
+  <thead>
+    <tr>
+      <th scope="col">Id</th>
+      <th scope="col">Forma</th>
+      <th scope="col">Color</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let row of data | filter: searchText">
+      <td>{{ row.id }}</td>
+      <td>{{ row.forma }}</td>
+      <td>{{ row.color }}</td>
+    </tr>
+  </tbody>
+</table>
+
+<ng-template #noResults>
+  <p>No existen resultados para "{{ searchText }}".</p>
+</ng-template>
